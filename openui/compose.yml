@@ -1,0 +1,23 @@
+services:
+  ollama:
+    container_name: ollama
+    image: ollama/ollama:latest
+    ports:
+      - 11434:11434
+    volumes:
+      - /path/to/openui-data:/root/.ollama
+    restart: unless-stopped
+  openui:
+    container_name: openui
+    image: ghcr.io/wandb/openui:latest
+    ports:
+      - 8083:7878
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - OPENAI_API_KEY="OpenAPIKey here"
+      - ANTHROPIC_API_KEY=""
+      - GROQ_API_KEY=""
+    env_file:
+      - .env
+    restart: unless-stopped
+networks: {}

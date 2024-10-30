@@ -1,0 +1,22 @@
+networks:
+  gitea:
+    external: false
+services:
+  server:
+    image: gitea/gitea:latest
+    security_opt:
+      - apparmor:unconfined
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: unless-stopped
+    networks:
+      - gitea
+    volumes:
+      - /path/to/gitea-data/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8083:3000
+      - 222:22

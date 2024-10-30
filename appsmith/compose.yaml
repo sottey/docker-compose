@@ -1,0 +1,11 @@
+services:
+  appsmith:
+    image: index.docker.io/appsmith/appsmith-ce:latest
+    container_name: appsmith
+    ports:
+      - 8083:80
+#     This can be uncommented if the app is exposed to the world
+#      - 443:443
+    volumes:
+      - /path/to/appsmith-data/stacks:/appsmith-stacks
+    restart: unless-stopped

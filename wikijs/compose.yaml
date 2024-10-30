@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:15-alpine
+    security_opt:
+      - apparmor:unconfined
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_PASSWORD: PASSWORD
+      POSTGRES_USER: wikijs
+    logging:
+      driver: none
+    restart: unless-stopped
+    volumes:
+      - /path/to/wikijs-data/db:/var/lib/postgresql/data
+  wiki:
+    image: ghcr.io/requarks/wiki:latest
+    security_opt:
+      - apparmor:unconfined
+    depends_on:
+      - db
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_PASS: PASSWORD
+      DB_NAME: wiki
+    restart: unless-stopped
+    ports:
+      - 8085:3000
+volumes:
+  db-data: null
+networks: {}

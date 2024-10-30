@@ -1,0 +1,44 @@
+services:
+  immich:
+    image: ghcr.io/imagegenius/immich:latest
+    container_name: immich
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America\Los_Angeles
+      - DB_HOSTNAME=localhost #or domain
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE_NAME=immich
+      - REDIS_HOSTNAME=localhost #or domain
+      - DB_PORT=5435 #optional
+      - REDIS_PORT=6379 #optional
+      - REDIS_PASSWORD= #optional
+      - MACHINE_LEARNING_HOST=0.0.0.0 #optional
+      - MACHINE_LEARNING_PORT=3003 #optional
+      - MACHINE_LEARNING_WORKERS=1 #optional
+      - MACHINE_LEARNING_WORKER_TIMEOUT=120 #optional
+    volumes:
+      - /path/to/immich-data/config:/config
+      - /path/to/immich-data/photos:/photos
+      - /path/to/immich-data/libraries:/libraries
+      - /path/to/host/media/photos:/path/to/photos/on/container
+    ports:
+      - 8086:8080
+    restart: unless-stopped
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    container_name: redis
+  # PostgreSQL 14:
+  postgres14:
+    image: tensorchord/pgvecto-rs:pg14-v0.2.0
+    ports:
+      - 5435:5432
+    container_name: postgres14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: immich
+networks: {}

@@ -1,0 +1,18 @@
+services:
+  duplicati:
+    container_name: duplicati
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    ports:
+      - 8083:8200
+    volumes:
+      - /path/to/duplicati-data:/config
+      - /path/to/backup/target:/backups
+      - /path/to/backup/source:/source
+    restart: unless-stopped
+    image: lscr.io/linuxserver/duplicati:latest
+    security_opt:
+      - apparmor:unconfined
+networks: {}

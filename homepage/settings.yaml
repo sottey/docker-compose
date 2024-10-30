@@ -1,0 +1,29 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/settings
+
+title: Server1
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  hideVisitURL: true
+
+hideVersion: true
+favicon: https://domain.com/favicon.png
+disableCollapse: true
+headerStyle: boxed
+statusStyle: "dot"
+iconStyle: theme
+# showStats: true
+
+layout:
+  Server1:
+#    style: column
+#    columns: 2
+    icon: https://domain.com/icon1.png
+  House:
+#    style: column
+#    columns: 1
+    icon: https://domain.com/icon2.png
+#https://cdn.iconscout.com/icon/premium/png-512-thumb/house-1871632-1583580.png?f=webp&w=512

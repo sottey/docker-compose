@@ -1,0 +1,15 @@
+services:
+  dockge:
+    image: louislam/dockge:beta
+    security_opt:
+      - apparmor:unconfined
+    restart: unless-stopped
+    container_name: dockge
+    ports:
+      - 8081:5001
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /path/to/dockge-data:/app/data
+      - /path/to/dockge-data/stacks:/opt/stacks
+    environment:
+      - DOCKGE_STACKS_DIR=/opt/stacks

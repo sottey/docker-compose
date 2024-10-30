@@ -1,0 +1,11 @@
+services:
+  pi.alert:
+    network_mode: host
+    volumes:
+      - /path/to/pialert-data/config:/home/pi/pialert/config
+      - /path/to/pialert-data/db:/home/pi/pialert/db
+    environment:
+      - TZ=America/Los_Angeles
+      - PORT=8086
+    image: jokobsk/pi.alert:latest
+networks: {}

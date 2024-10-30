@@ -1,0 +1,12 @@
+services:
+  linkding:
+    container_name: linkding
+    image: sissbruecker/linkding:latest
+    ports:
+      - 8085:9090
+    volumes:
+      - /path/to/linkding-data/data:/etc/linkding/data
+    env_file:
+      - .env
+    restart: unless-stopped
+networks: {}

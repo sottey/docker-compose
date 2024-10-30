@@ -1,0 +1,16 @@
+---
+- Server1:
+    - Item1 (8080):
+        icon: si-homeassistant
+        href: http://192.168.7.2:8080/
+        description: Dashboard
+        siteMonitor: http://192.168.7.2:8080/
+        server: Server1
+        container: homepage
+    - Item2 (8081):
+        icon: si-docker
+        href: http://192.168.7.20:8081/
+        description: Docker Containers
+        siteMonitor: http://192.168.7.20:8081/
+        server: Server1
+        container: dockge

@@ -1,0 +1,14 @@
+services:
+  idrac6:
+    ports:
+      - 8086:5800
+      - 8087:5900
+    environment:
+      - IDRAC_HOST=192.168.4.8
+      - IDRAC_USER=USER
+      - IDRAC_PASSWORD=PASSWORD
+      - DISPLAY_WIDTH=1920
+      - DISPLAY_HEIGHT=1080
+    image: domistyle/idrac6
+    restart: unless-stopped
+networks: {}

@@ -1,0 +1,14 @@
+services:
+  server:
+    restart: unless-stopped
+    environment:
+      - SIGNUPS_ALLOWED=false
+    container_name: vaultwarden
+    volumes:
+      - /path/to/vaultwarden-data/:/data/
+    ports:
+      - 8085:80
+    image: vaultwarden/server:latest
+    security_opt:
+      - apparmor:unconfined
+networks: {}

@@ -1,0 +1,15 @@
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    security_opt:
+      - apparmor:unconfined
+    ports:
+      - 8085:8080
+    volumes:
+      - /path/to/sterling-data/trainingData:/usr/share/tesseract-ocr/5/tessdata
+      - /path/to/sterling-data/configs:/configs
+      - /path/to/sterling-data/customFiles:/customFiles/
+      - /path/to/sterling-data/logs:/logs/
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+

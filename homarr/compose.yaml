@@ -1,0 +1,13 @@
+services:
+  homarr:
+    image: ghcr.io/ajnart/homarr:latest
+    security_opt:
+      - apparmor:unconfined
+    container_name: homarr
+    restart: unless-stopped
+    volumes:
+      - /path/to/homarr-data/configs:/app/data/configs
+      - /path/to/homarr-data/icons:/app/public/icons
+    ports:
+      - 8080:7575
+networks: {}

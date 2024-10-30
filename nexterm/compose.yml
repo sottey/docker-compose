@@ -1,0 +1,10 @@
+services:
+  nexterm:
+    ports:
+      - 8088:6989
+    restart: always
+    volumes:
+      - /path/to/nexterm_data:/app/data
+    image: germannewsmaker/nexterm:1.0.1-OPEN-PREVIEW
+volumes:
+  nexterm: null

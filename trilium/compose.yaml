@@ -1,0 +1,14 @@
+services:
+  trilium:
+    image: zadam/trilium
+    container_name: trilium
+    security_opt:
+      - apparmor:unconfined
+    restart: unless-stopped
+    environment:
+      - TRILIUM_DATA_DIR=/home/node/trilium-data
+    ports:
+      - 8080:8080
+    volumes:
+      - /path/to/trilium-data:/home/node/trilium-data
+networks: {}

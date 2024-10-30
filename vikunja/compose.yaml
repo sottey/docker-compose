@@ -1,0 +1,49 @@
+version: "3"
+services:
+  db:
+    image: mariadb:10
+    security_opt:
+      - apparmor:unconfined
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: PASSWORD
+      MYSQL_USER: vikunja
+      MYSQL_PASSWORD: PASSWORD
+      MYSQL_DATABASE: vikunja
+    volumes:
+      - /path/to/vikunja-data/db:/var/lib/mysql
+    restart: unless-stopped
+  api:
+    image: vikunja/api
+    security_opt:
+      - apparmor:unconfined
+    environment:
+      VIKUNJA_DATABASE_HOST: db
+      VIKUNJA_DATABASE_PASSWORD: PASSWORD
+      VIKUNJA_DATABASE_TYPE: mysql
+      VIKUNJA_DATABASE_USER: vikunja
+      VIKUNJA_DATABASE_DATABASE: vikunja
+      VIKUNJA_SERVICE_JWTSECRET: JWTSECRET
+      VIKUNJA_SERVICE_FRONTENDURL: http://192.168.7.8/
+    volumes:
+      - /path/to/vikunja-data/files:/app/vikunja/files
+    depends_on:
+      - db
+    restart: unless-stopped
+  frontend:
+    image: vikunja/frontend
+    security_opt:
+      - apparmor:unconfined
+    restart: unless-stopped
+  proxy:
+    image: nginx
+    security_opt:
+      - apparmor:unconfined
+    ports:
+      - 8080:80
+    volumes:
+      - /path/to/vikunja-data/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - api
+      - frontend
+    restart: unless-stopped

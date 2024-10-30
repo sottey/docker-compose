@@ -1,0 +1,10 @@
+services:
+  llamacpp:
+    image: joshxt/local-llm:cpu
+    environment:
+      - LOCAL_LLM_API_KEY=setthistoapileyorcommentfornone
+    restart: unless-stopped
+    ports:
+      - 8086:8091
+    volumes:
+      - /path/to/localllm-data/models:/app/models

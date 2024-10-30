@@ -1,0 +1,15 @@
+services:
+  kavita:
+    image: jvmilazz0/kavita:latest
+    security_opt:
+      - apparmor:unconfined
+    container_name: kavita
+    volumes:
+      - /path/to/ebooks:/books
+      - /path/to/kavita-data/data:/kavita/config
+    environment:
+      - TZ=America/Los_Angeles
+    ports:
+      - 8084:5000
+    restart: unless-stopped
+networks: {}

@@ -1,0 +1,14 @@
+services:
+  glances:
+    restart: unless-stopped
+    ports:
+      - 61208-61209:61208-61209
+    environment:
+      - GLANCES_OPT=-w
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /drive/to/track:/mounts/drive1
+      - /drive/to/track:/mounts/drive2
+    pid: host
+    image: docker.io/nicolargo/glances
+networks: {}

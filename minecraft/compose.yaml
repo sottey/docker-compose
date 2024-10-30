@@ -1,0 +1,16 @@
+services:
+  mc:
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
+    ports:
+      - 25565:25565
+    environment:
+      EULA: "TRUE"
+      VERSION: 1.20.1
+      MEMORY: 5G
+      OVERRIDE_ICON: "TRUE"
+      # WORLD: http://domain.com/mc/skyblock8.zip
+    volumes:
+      - /path/to/minecraft-data/data:/data
+networks: {}

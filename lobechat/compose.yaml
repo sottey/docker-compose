@@ -1,0 +1,13 @@
+services:
+  lobe-chat:
+    ports:
+      - 8086:3210
+    environment:
+      - OPENAI_API_KEY=MY_OPEN_API_KEY
+      - ACCESS_CODE=MY_ACCESS_CODE
+    container_name: lobe-chat
+    image: lobehub/lobe-chat
+    security_opt:
+      - apparmor:unconfined
+    restart: unless-stopped
+networks: {}

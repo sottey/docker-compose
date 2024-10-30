@@ -1,0 +1,19 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: win11
+    devices:
+      - /dev/kvm
+      - /dev/sda:/disk2
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /path/to/win11-data:/storage
+    ports:
+      - 8082:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    stop_grace_period: 2m
+networks: {}

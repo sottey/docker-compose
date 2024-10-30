@@ -1,0 +1,11 @@
+services:
+  dagu:
+    ports:
+      - 8088:8080
+    volumes:
+      - /path/to/dagu-data/dags:/home/dagu/.dagu/dags
+      - /path/to/dagu-data/data:/home/dagu/.dagu/data
+      - /path/to/dagu-data/logs:/home/dagu/.dagu/logs
+    image: ghcr.io/dagu-dev/dagu:latest
+    command: dagu start-all
+networks: {}

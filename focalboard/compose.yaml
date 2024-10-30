@@ -1,0 +1,8 @@
+services:
+  focalboard:
+    stdin_open: true
+    tty: true
+    ports:
+      - 8082:8000
+    image: mattermost/focalboard
+networks: {}

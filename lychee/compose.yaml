@@ -1,0 +1,50 @@
+services:
+  lychee_db:
+    container_name: lychee_db
+    image: mariadb:10
+    environment:
+      - MYSQL_ROOT_PASSWORD=PASSWORD
+      - MYSQL_DATABASE=lychee
+      - MYSQL_USER=lychee
+      - MYSQL_PASSWORD=changethistoyourpassword
+    expose:
+      - 3306
+    volumes:
+      - /path/to/lychee-data/db:/var/lib/mysql
+    networks:
+      - lychee
+    restart: unless-stopped
+  lychee:
+    image: lycheeorg/lychee
+    container_name: lychee
+    ports:
+      - 8086:80
+    volumes:
+      - /path/to/lychee-data/conf:/conf
+      - /path/to/lychee-data/uploads:/uploads:ro
+      - /path/to/lychee-data/sym:/sym
+      - /path/to/lychee-data/logs:/logs
+    networks:
+      - lychee
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - PHP_TZ=America/Los_Angeles
+      - TIMEZONE=America/Los_Angeles
+      - APP_FORCE_HTTPS=false
+      - APP_URL=http://192.168.7.2:8086
+      - DB_CONNECTION=mysql
+      - DB_HOST=lychee_db
+      - DB_PORT=3306
+      - DB_DATABASE=lychee
+      - DB_USERNAME=lychee
+      - DB_PASSWORD=PASSWORD
+      - STARTUP_DELAY=30
+      # - ADMIN_USER=admin
+      # - ADMIN_PASSWORD=<ADMIN_PASSWORD>
+      # - ADMIN_PASSWORD_FILE=<filename>
+    restart: unless-stopped
+    depends_on:
+      - lychee_db
+networks:
+  lychee: null

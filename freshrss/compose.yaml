@@ -1,0 +1,19 @@
+services:
+  freshrss:
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: 10m
+    ports:
+      - 8082:80
+    environment:
+      - TZ=America/Los_Angeles
+      - CRON_MIN=1,31
+    volumes:
+      - /path/to/freshrss-data/data:/var/www/FreshRSS/data
+      - /path/to/freshrss-data/extensions:/var/www/FreshRSS/extensions
+    container_name: freshrss
+    image: freshrss/freshrss:latest
+    security_opt:
+      - apparmor:unconfined
+networks: {}

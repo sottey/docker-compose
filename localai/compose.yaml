@@ -1,0 +1,11 @@
+services:
+  local-ai:
+    ports:
+      - 8080:8080
+    tty: true
+    stdin_open: true
+    volumes:
+      - /path/to/localai-data/models:/app/models
+    image: localai/localai:latest
+    command: --models-path /app/models --context-size 700 --threads 4 --cors true
+networks: {}

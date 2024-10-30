@@ -1,0 +1,15 @@
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    security_opt:
+      - apparmor:unconfined
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /path/to/vscode-data/config:/config
+    ports:
+      - 8084:8443
+    restart: unless-stopped

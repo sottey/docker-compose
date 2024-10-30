@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    container_name: pocketbase
+    restart: unless-stopped
+    command:
+      - --encryptionEnv #optional
+      - ENCRYPTION #optional
+    environment:
+      ENCRYPTION: example #optional
+    ports:
+      - 8088:8090
+    volumes:
+      - /path/to/pocketbase-data/data:/pb_data
+      - /path/to/pocketbase-data/public:/pb_public
+      - /path/to/pocketbase-data/hooks:/pb_hooks
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider #http://localhost:8088/api/health || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 5
+networks: {}

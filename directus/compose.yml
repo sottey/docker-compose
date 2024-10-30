@@ -1,0 +1,17 @@
+services:
+  directus:
+    image: directus/directus:11.0.2
+    ports:
+      - 8087:8055
+    volumes:
+      - /path/to/directus-data/database:/directus/database
+      - /path/to/directus-data/uploads:/directus/uploads
+      - /path/to/directus-data/extensions:/directus/extensions
+    environment:
+      SECRET: PutSecretHere
+      ADMIN_EMAIL: e@mailmail.com
+      ADMIN_PASSWORD: AdminPass
+      DB_CLIENT: sqlite3
+      DB_FILENAME: /directus/database/data.db
+      WEBSOCKETS_ENABLED: "true"
+    restart: unless-stopped

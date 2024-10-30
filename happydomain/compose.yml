@@ -1,0 +1,9 @@
+services:
+  happydomain:
+    environment:
+      - HAPPYDOMAIN_NO_AUTH=1
+    ports:
+      - 8089:8081
+    image: happydomain/happydomain
+    restart: unless-stopped
+networks: {}

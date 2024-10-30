@@ -1,0 +1,11 @@
+services:
+  gogs:
+    volumes:
+      - /path/to/gogs-data/data:/data
+    ports:
+      - 8087:3000
+      - 9090:22
+    image: gogs/gogs
+    security_opt:
+      - apparmor:unconfined
+networks: {}
